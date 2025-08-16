@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Produto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <h1 id="produto-nome">Produto</h1>
+</header>
+
+<main class="produto-detalhe">
+    <img id="produto-img" src="" alt="">
+    <p><strong>Código:</strong> <span id="produto-codigo"></span></p>
+    <p id="produto-descricao"></p>
+
+    <h3>Características:</h3>
+    <ul id="produto-caracteristicas"></ul>
+
+    <p><strong>Marca:</strong> <span id="produto-marca"></span></p>
+    <p><strong>Categoria:</strong> <span id="produto-categoria"></span></p>
+    <a href="index.html">← Voltar ao Catálogo</a>
+</main>
+
+<script src="produto.js"></script>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    if (id && produtos[id]) {
+        const p = produtos[id];
+        document.getElementById("produto-nome").textContent = p.nome;
+        document.getElementById("produto-img").src = p.imagem;
+        document.getElementById("produto-img").alt = p.nome;
+        document.getElementById("produto-codigo").textContent = p.codigo;
+        document.getElementById("produto-descricao").textContent = p.descricao;
+        document.getElementById("produto-marca").textContent = p.marca;
+        document.getElementById("produto-categoria").textContent = p.categoria;
+
+        // Preencher a lista de características
+        const lista = document.getElementById("produto-caracteristicas");
+
+        // Caso seja um objeto com seções
+        if (typeof p.caracteristicas === "object" && !Array.isArray(p.caracteristicas)) {
+            for (const categoria in p.caracteristicas) {
+                const liTitulo = document.createElement("li");
+                liTitulo.innerHTML = `<strong>${categoria}</strong>`;
+                lista.appendChild(liTitulo);
+
+                p.caracteristicas[categoria].forEach(item => {
+                    const li = document.createElement("li");
+                    li.textContent = "  " + item;
+                    lista.appendChild(li);
+                });
+            }
+        } else {
+            // Compatibilidade com os antigos (array simples)
+            p.caracteristicas.forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = item;
+                lista.appendChild(li);
+            });
+        }
+    } else {
+        document.querySelector(".produto-detalhe").innerHTML = "<p>Produto não encontrado.</p>";
+    }
+</script>
+</body>
+</html>

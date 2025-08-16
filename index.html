@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Acessórios</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <h1>Catálogo Acessórios</h1>
+
+    <div class="busca-container">
+        <input type="text" id="search" placeholder="Buscar produto...">
+        <button id="btnBuscar">Buscar</button>
+    </div>
+
+    <select id="filter">
+        <option value="all">Todas as categorias</option>
+    </select>
+
+    <select id="brandFilter">
+        <option value="all">Todas as marcas</option>
+    </select>
+</header>
+
+<main class="catalogo" id="catalogo"></main>
+
+<footer>
+    <p>© 2025 - Meu Catálogo</p>
+</footer>
+
+<script src="produto.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
